@@ -12,6 +12,7 @@ import "@/app/globals.css";
 export default function Home() {
   const [messages, setMessages] = useState<{ text: string; sender: string }[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [currentModel, setCurrentModel] = useState('general');
 
   const handleSendMessage = async (message: string) => {
     if (!message.trim()) return;
@@ -24,13 +25,16 @@ export default function Home() {
     setIsLoading(true);
     
     try {
-      // 调用API获取响应
+      // 调用API获取响应，现在包含模型信息
       const response = await fetch('http://localhost:8000/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ "msg": message }),
+        body: JSON.stringify({ 
+          "msg": message,
+          "model": currentModel  // 添加当前选择的模型
+        }),
       });
 
       if (response.ok) {
@@ -66,11 +70,29 @@ export default function Home() {
     }
   };
 
+  // 处理模型变更的函数
+  const handleModelChange = (modelId: string) => {
+    setCurrentModel(modelId);
+    
+    // 可选：添加一条系统消息通知用户模型已更改
+    setMessages(prevMessages => [
+      ...prevMessages,
+      { 
+        text: `Knowledge base changed to: ${modelId.charAt(0).toUpperCase() + modelId.slice(1)}`, 
+        sender: 'bot' 
+      }
+    ]);
+  };
+
   return (
     <main>
       <ChatTitle/>
       <ChatBubbles messages={messages}/>
-      <ChatBar onSendMessage={handleSendMessage} isLoading={isLoading} />
+      <ChatBar 
+        onSendMessage={handleSendMessage} 
+        isLoading={isLoading} 
+        onModelChange={handleModelChange}
+      />
     </main>
   );
 }

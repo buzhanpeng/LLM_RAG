@@ -556,3 +556,125 @@
   transform-style: preserve-3d;
   will-change: transform;
 }
+
+/* Model selection container */
+.modelSelectContainer {
+  position: relative;
+  margin-left: 10px;
+}
+
+/* Model select button */
+.modelSelectButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background-color: var(--surface-highlight);
+  color: var(--primary-text-color);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  font-size: 0.9em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: var(--cartoon-font);
+}
+
+.modelSelectButton:hover {
+  background-color: var(--border-color);
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.modelSelectIcon {
+  transition: transform 0.3s ease;
+}
+
+.modelSelectButton:hover .modelSelectIcon {
+  transform: rotate(15deg);
+  animation: glowPulse 1.5s infinite;
+}
+
+.selectedModelName {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 120px;
+}
+
+/* Dropdown menu */
+.modelDropdown {
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 0;
+  width: 200px;
+  background-color: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  z-index: 10;
+  overflow: hidden;
+  animation: fadeInUp 0.3s ease-out forwards;
+}
+
+/* Model options */
+.modelOption {
+  width: 100%;
+  padding: 10px 15px;
+  text-align: left;
+  background-color: transparent;
+  color: var(--primary-text-color);
+  border: none;
+  border-bottom: 1px solid var(--border-color);
+  font-size: 0.9em;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  font-family: var(--cartoon-font);
+}
+
+.modelOption:last-child {
+  border-bottom: none;
+}
+
+.modelOption:hover {
+  background-color: var(--surface-highlight);
+}
+
+.selectedModel {
+  background-color: var(--accent-color);
+  color: #111;
+  font-weight: 500;
+}
+
+.selectedModel:hover {
+  background-color: var(--accent-color);
+  filter: brightness(1.1);
+}
+
+/* New animation for dropdown */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mobile responsiveness for model selector */
+@media (max-width: 600px) {
+  .selectedModelName {
+    display: none;
+  }
+
+  .modelSelectButton {
+    padding: 8px;
+  }
+
+  .modelDropdown {
+    width: 180px;
+    right: 0;
+    left: auto;
+  }
+}

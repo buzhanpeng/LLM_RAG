@@ -8,13 +8,36 @@ import styles from '@/app/ui/styles/chat.module.css'
 interface ChatBarProps {
   onSendMessage: (message: string) => void;
   isLoading?: boolean;
+  onModelChange?: (model: string) => void;
 }
 
-const ChatBar: React.FC<ChatBarProps> = ({ onSendMessage, isLoading = false }) => {
+const AVAILABLE_MODELS = [
+  { id: 'OpenAI', name: 'GPT-4' },
+  { id: 'DeepSeek', name: 'DS-o1' },
+];
+
+const ChatBar: React.FC<ChatBarProps> = ({ onSendMessage, isLoading = false, onModelChange }) => {
   const [message, setMessage] = useState('');
   const [file, setFile] = useState<File | null>(null);
   const [isTyping, setIsTyping] = useState(false);
+  const [selectedModel, setSelectedModel] = useState(AVAILABLE_MODELS[0].id);
+  const [isModelMenuOpen, setIsModelMenuOpen] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const modelMenuRef = useRef<HTMLDivElement>(null);
+
+  // Close model dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (modelMenuRef.current && !modelMenuRef.current.contains(event.target as Node)) {
+        setIsModelMenuOpen(false);
+      }
+    };
+    
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   // 调整textarea高度的函数
   const adjustTextareaHeight = () => {
@@ -91,6 +114,14 @@ const ChatBar: React.FC<ChatBarProps> = ({ onSendMessage, isLoading = false }) =
     }
   };
 
+  const handleModelChange = (modelId: string) => {
+    setSelectedModel(modelId);
+    setIsModelMenuOpen(false);
+    if (onModelChange) {
+      onModelChange(modelId);
+    }
+  };
+
   return (
     <section className={styles.chatBar}>
         <div className={styles.fileUploadSection}>
@@ -114,8 +145,43 @@ const ChatBar: React.FC<ChatBarProps> = ({ onSendMessage, isLoading = false }) =
               disabled={!file}
               className={styles.uploadButton}
             >
-              Submit Document
+              Subir Documento
             </button>
+            
+            {/* New Model Selection Button */}
+            <div className={styles.modelSelectContainer} ref={modelMenuRef}>
+              <button 
+                onClick={() => setIsModelMenuOpen(!isModelMenuOpen)}
+                className={styles.modelSelectButton}
+                aria-label="Select Model"
+                aria-expanded={isModelMenuOpen}
+              >
+                <Image
+                  src={'/select_model.svg'}
+                  alt={'Select Model Icon'}
+                  height={20}
+                  width={20}
+                  className={styles.modelSelectIcon}
+                />
+                <span className={styles.selectedModelName}>
+                  {AVAILABLE_MODELS.find(model => model.id === selectedModel)?.name}
+                </span>
+              </button>
+              
+              {isModelMenuOpen && (
+                <div className={styles.modelDropdown}>
+                  {AVAILABLE_MODELS.map(model => (
+                    <button
+                      key={model.id}
+                      className={`${styles.modelOption} ${selectedModel === model.id ? styles.selectedModel : ''}`}
+                      onClick={() => handleModelChange(model.id)}
+                    >
+                      {model.name}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
         </div>
         <form
           onSubmit={sendMessage} 
