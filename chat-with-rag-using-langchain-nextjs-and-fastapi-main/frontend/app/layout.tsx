@@ -13,8 +13,9 @@ export default function RootLayout({
     <html lang="en">
       <Head>
         <link rel="icon" href="/favicon.ico"/>
+        
         <title>LangChain Chat</title>
-
+        
         <meta charSet="utf-8"/>
         <meta lang="ES" />
 

@@ -74,7 +74,7 @@ export default function Home() {
   const handleModelChange = (modelId: string) => {
     setCurrentModel(modelId);
     
-    // 可选：添加一条系统消息通知用户模型已更改
+    //添加一条系统消息通知用户模型已更改
     setMessages(prevMessages => [
       ...prevMessages,
       { 
