@@ -1,369 +1,558 @@
 /* chat.module.css */
 
-/* 定义动画 */
+/* Defining Animations */
 @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translate3d(0, 40px, 0);
-    }
-    to {
-      opacity: 1;
-      transform: translate3d(0, 0, 0);
-    }
+  from {
+    opacity: 0;
+    transform: translate3d(0, 40px, 0);
   }
-  
-  @keyframes pulse {
-    0% { box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.4); }
-    70% { box-shadow: 0 0 0 10px rgba(0, 123, 255, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(0, 123, 255, 0); }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
   }
-  
-  @keyframes typing {
-    0%, 100% { border-color: transparent; }
-    50% { border-color: var(--accent-color); }
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.4);
   }
-  
-  @keyframes floatingElement {
-    0% { transform: translateY(0); }
-    50% { transform: translateY(-5px); }
-    100% { transform: translateY(0); }
+  70% {
+    box-shadow: 0 0 0 10px rgba(0, 123, 255, 0);
   }
-  
-  @keyframes wiggle {
-    0%, 100% { transform: rotate(-3deg); }
-    50% { transform: rotate(3deg); }
+  100% {
+    box-shadow: 0 0 0 0 rgba(0, 123, 255, 0);
   }
-  
-  @keyframes glowPulse {
-    0%, 100% { filter: drop-shadow(0 0 2px var(--accent-color)); }
-    50% { filter: drop-shadow(0 0 8px var(--accent-color)); }
+}
+
+@keyframes typing {
+  0%,
+  100% {
+    border-color: transparent;
   }
-  
-  /* 聊天区域容器 */
-  .chatArea {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    background-color: var(--surface-color);
-    border-radius: 12px;
-    margin: 20px;
-    box-shadow: 0 8px 25px var(--shadow-color);
-    border: 1px solid var(--border-color);
-  }
-  
-  /* 聊天标题 */
-  .chatTitle {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    align-items: center;
-    color: var(--primary-text-color);
-    font-weight: 500;
-    font-size: 1.1em;
-    padding: 15px 20px;
-    background-color: var(--surface-highlight);
-    border-bottom: 1px solid var(--border-color);
-    border-radius: 12px 12px 0 0;
-  }
-  
-  .chatTitle strong {
-    font-family: var(--cartoon-font);
-    animation: floatingElement 3s ease-in-out infinite;
-  }
-  
-  .chatTitle img {
-    animation: wiggle 5s ease-in-out infinite;
-  }
-  
-  /* 消息气泡容器 */
-  .chatBubblesContainer {
-    display: flex;
-    flex: 1;
-    position: relative;
-    overflow: hidden;
-  }
-  
-  /* 消息气泡区域 */
-  .chatBubbles {
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-    margin: 0;
-    padding: 20px;
-    overflow-y: auto;
-    gap: 12px;
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE and Edge */
-  }
-  
-  /* 隐藏原生滚动条 */
-  .chatBubbles::-webkit-scrollbar {
-    display: none;
-  }
-  
-  /* 自定义滚动条容器 */
-  .customScrollbar {
-    position: absolute;
-    right: 5px;
-    top: 10px;
-    bottom: 10px;
-    width: 12px;
-    z-index: 10;
-  }
-  
-  .scrollTrack {
-    position: absolute;
-    width: 6px;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    background-color: var(--scrollbar-track-color);
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .scrollThumb {
-    position: absolute;
-    width: 6px;
-    background-color: var(--scrollbar-color);
-    border-radius: 4px;
-    cursor: grab;
-    transition: width 0.2s ease;
-  }
-  
-  .scrollThumb:hover {
-    width: 10px;
-    background-color: var(--accent-hover-color);
-  }
-  
-  .scrollThumb:active {
-    cursor: grabbing;
-  }
-  
-  /* 通用消息气泡样式 */
-  .messageBase {
-    padding: 10px 15px;
-    border-radius: 18px;
-    max-width: 75%;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    line-height: 1.5;
-    word-wrap: break-word;
-    animation: fadeInUp 0.5s ease-out forwards;
-    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease, filter 0.3s ease;
-  }
-  
-  /* 用户消息 */
-  .userMessage {
-    composes: messageBase;
-    align-self: flex-end;
-    background-color: var(--accent-color);
-    color: #111;
-    border-radius: 16px 16px 4px 16px;
-    animation: fadeInUp 0.5s ease-out forwards, floatingElement 6s ease-in-out infinite;
-    font-family: var(--cartoon-font);
-  }
-  
-  .userMessage:hover {
-    filter: brightness(1.1);
-    transform: scale(1.02);
-  }
-  
-  /* Bot 消息 */
-  .botMessage {
-    composes: messageBase;
-    align-self: flex-start;
-    background-color: var(--surface-highlight);
-    color: var(--primary-text-color);
-    border: 1px solid var(--border-color);
-    border-radius: 16px 16px 16px 4px;
-  }
-  
-  .botMessage:hover {
-    border-color: var(--secondary-text-color);
-    transform: translateY(-2px);
-  }
-  
-  /* 聊天输入栏 */
-  .chatBar {
-    display: flex;
-    flex-direction: column;
-    border-top: 1px solid var(--border-color);
-    margin: 0;
-    padding: 15px 20px;
-    gap: 15px;
-    background-color: var(--surface-color);
-    border-radius: 0 0 12px 12px;
-  }
-  
-  /* 文件上传部分 */
-  .fileUploadSection {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  
-  .fileUploadLabel {
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 8px;
-    border-radius: 50%;
-    background-color: var(--surface-highlight);
-    transition: all 0.3s ease;
-  }
-  
-  .fileUploadLabel:hover {
-    background-color: var(--border-color);
-    transform: rotate(15deg);
-  }
-  
-  .paperclipIcon {
-    transition: transform 0.3s ease;
-  }
-  
-  .fileUploadLabel:hover .paperclipIcon {
-    transform: scale(1.2);
-  }
-  
-  .uploadButton {
-    padding: 8px 12px;
-    background-color: var(--surface-highlight);
-    color: var(--primary-text-color);
-    border: 1px solid var(--border-color);
-    border-radius: 20px;
-    font-size: 0.9em;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-family: var(--cartoon-font);
-  }
-  
-  .uploadButton:hover:not(:disabled) {
-    background-color: var(--border-color);
-    transform: translateY(-2px);
-  }
-  
-  .uploadButton:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-  
-  /* 消息表单 */
-  .messageForm {
-    display: flex;
-    justify-content: start;
-    align-items: flex-end;
-    gap: 10px;
-    width: 100%;
-  }
-  
-  /* 文本框容器 */
-  .textareaContainer {
-    position: relative;
-    flex: 1;
-    border-radius: 20px;
-    background-color: var(--surface-highlight);
-    border: 1px solid var(--border-color);
-    padding: 10px 15px;
-    transition: all 0.3s ease, height 0.2s ease;
-  }
-  
-  .textareaContainer:focus-within {
+  50% {
     border-color: var(--accent-color);
-    box-shadow: 0 0 10px var(--glow-color);
   }
-  
-  /* 打字指示器 */
-  .typingIndicator {
-    position: absolute;
-    right: 10px;
-    bottom: 10px;
-    width: 8px;
-    height: 8px;
-    background-color: var(--accent-color);
-    border-radius: 50%;
-    animation: glowPulse 0.8s infinite;
+}
+
+@keyframes floatingElement {
+  0% {
+    transform: translateY(0);
   }
-  
-  /* 输入框样式 */
-  .messageTextarea {
-    width: 100%;
-    border: none;
-    outline: none;
-    color: var(--primary-text-color);
-    background-color: transparent;
-    resize: none;
-    overflow-y: auto;
-    font-family: var(--cartoon-font);
-    font-size: 1em;
-    min-height: 24px;
-    max-height: 150px;
+  50% {
+    transform: translateY(-5px);
   }
-  
-  .messageTextarea::placeholder {
-    color: var(--secondary-text-color);
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes wiggle {
+  0%,
+  100% {
+    transform: rotate(-3deg);
+  }
+  50% {
+    transform: rotate(3deg);
+  }
+}
+
+@keyframes glowPulse {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 2px var(--accent-color));
+  }
+  50% {
+    filter: drop-shadow(0 0 8px var(--accent-color));
+  }
+}
+
+/* Chat area container */
+.chatArea {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background-color: var(--surface-color);
+  border-radius: 12px;
+  margin: 20px;
+  box-shadow: 0 8px 25px var(--shadow-color);
+  border: 1px solid var(--border-color);
+}
+
+/* Chat Title */
+.chatTitle {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  color: var(--primary-text-color);
+  font-weight: 500;
+  font-size: 1.1em;
+  padding: 15px 20px;
+  background-color: var(--surface-highlight);
+  border-bottom: 1px solid var(--border-color);
+  border-radius: 12px 12px 0 0;
+}
+
+.chatTitle strong {
+  font-family: var(--cartoon-font);
+  animation: floatingElement 3s ease-in-out infinite;
+}
+
+.chatTitle img {
+  animation: wiggle 5s ease-in-out infinite;
+}
+
+.chatBubblesContainer {
+  display: flex;
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.chatBubbles {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  margin: 0;
+  padding: 20px;
+  overflow-y: auto;
+  gap: 12px;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+/* Hide native scrollbars */
+.chatBubbles::-webkit-scrollbar {
+  display: none;
+}
+
+/* Customizing the scrollbar container */
+.customScrollbar {
+  position: absolute;
+  right: 5px;
+  top: 10px;
+  bottom: 10px;
+  width: 12px;
+  z-index: 10;
+}
+
+.scrollTrack {
+  position: absolute;
+  width: 6px;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  background-color: var(--scrollbar-track-color);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.scrollThumb {
+  position: absolute;
+  width: 6px;
+  background-color: var(--scrollbar-color);
+  border-radius: 4px;
+  cursor: grab;
+  transition: width 0.2s ease;
+}
+
+.scrollThumb:hover {
+  width: 10px;
+  background-color: var(--accent-hover-color);
+}
+
+.scrollThumb:active {
+  cursor: grabbing;
+}
+
+/* Generic Message Bubble Style */
+.messageBase {
+  padding: 10px 15px;
+  border-radius: 18px;
+  max-width: 75%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  line-height: 1.5;
+  word-wrap: break-word;
+  animation: fadeInUp 0.5s ease-out forwards;
+  transition: background-color 0.3s ease, border-color 0.3s ease,
+    box-shadow 0.3s ease, transform 0.2s ease, filter 0.3s ease;
+}
+
+/* user message */
+.userMessage {
+  composes: messageBase;
+  align-self: flex-end;
+  background-color: var(--accent-color);
+  color: #111;
+  border-radius: 16px 16px 4px 16px;
+  animation: fadeInUp 0.5s ease-out forwards,
+    floatingElement 6s ease-in-out infinite;
+  font-family: var(--cartoon-font);
+}
+
+.userMessage:hover {
+  filter: brightness(1.1);
+  transform: scale(1.02);
+}
+
+/* Bot News */
+.botMessage {
+  composes: messageBase;
+  align-self: flex-start;
+  background-color: var(--surface-highlight);
+  color: var(--primary-text-color);
+  border: 1px solid var(--border-color);
+  border-radius: 16px 16px 16px 4px;
+}
+
+.botMessage:hover {
+  border-color: var(--secondary-text-color);
+  transform: translateY(-2px);
+}
+
+/* Chat input field */
+.chatBar {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--border-color);
+  margin: 0;
+  padding: 15px 20px;
+  gap: 15px;
+  background-color: var(--surface-color);
+  border-radius: 0 0 12px 12px;
+}
+
+/* File upload section */
+.fileUploadSection {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.fileUploadLabel {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  border-radius: 50%;
+  background-color: var(--surface-highlight);
+  transition: all 0.3s ease;
+}
+
+.fileUploadLabel:hover {
+  background-color: var(--border-color);
+  transform: rotate(15deg);
+}
+
+.paperclipIcon {
+  transition: transform 0.3s ease;
+}
+
+.fileUploadLabel:hover .paperclipIcon {
+  transform: scale(1.2);
+}
+
+.uploadButton {
+  padding: 8px 12px;
+  background-color: var(--surface-highlight);
+  color: var(--primary-text-color);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  font-size: 0.9em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: var(--cartoon-font);
+}
+
+.uploadButton:hover:not(:disabled) {
+  background-color: var(--border-color);
+  transform: translateY(-2px);
+}
+
+.uploadButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* message form */
+.messageForm {
+  display: flex;
+  justify-content: start;
+  align-items: flex-end;
+  gap: 10px;
+  width: 100%;
+}
+
+/* textbox container */
+.textareaContainer {
+  position: relative;
+  flex: 1;
+  border-radius: 20px;
+  background-color: var(--surface-highlight);
+  border: 1px solid var(--border-color);
+  padding: 10px 15px;
+  transition: all 0.3s ease, height 0.2s ease;
+}
+
+.textareaContainer:focus-within {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 10px var(--glow-color);
+}
+
+/* typing indicator */
+.typingIndicator {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  width: 8px;
+  height: 8px;
+  background-color: var(--accent-color);
+  border-radius: 50%;
+  animation: glowPulse 0.8s infinite;
+}
+
+/* Input Box Style */
+.messageTextarea {
+  width: 100%;
+  border: none;
+  outline: none;
+  color: var(--primary-text-color);
+  background-color: transparent;
+  resize: none;
+  overflow-y: auto;
+  font-family: var(--cartoon-font);
+  font-size: 1em;
+  min-height: 24px;
+  max-height: 150px;
+}
+
+.messageTextarea::placeholder {
+  color: var(--secondary-text-color);
+  opacity: 0.7;
+}
+
+/* Typing animation */
+.isTyping .messageTextarea {
+  border-right: 2px solid var(--accent-color);
+  animation: typing 1s infinite;
+}
+
+/* Send button */
+.sendButton {
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.sendButton:hover:not(:disabled) {
+  background-color: var(--surface-highlight);
+  transform: scale(1.1);
+}
+
+.sendButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.sendIcon {
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.sendIconActive {
+  animation: glowPulse 1.5s infinite;
+}
+
+/* Load indicator (example: three jumping dots) */
+.loadingIndicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.loadingDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--accent-color);
+  animation: loadingBounce 1.4s infinite ease-in-out both;
+}
+
+.loadingDot:nth-child(1) {
+  animation-delay: -0.32s;
+}
+.loadingDot:nth-child(2) {
+  animation-delay: -0.16s;
+}
+.loadingDot:nth-child(3) {
+  animation-delay: 0s;
+}
+
+@keyframes loadingBounce {
+  0%,
+  80%,
+  100% {
+    transform: scale(0);
+  }
+  40% {
+    transform: scale(1);
+  }
+}
+
+/* Add these new animations*/
+
+/* Title bounce animation */
+@keyframes titleBounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+/* Pulse animation for hover effects */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
     opacity: 0.7;
   }
-  
-  /* 打字动画 */
-  .isTyping .messageTextarea {
-    border-right: 2px solid var(--accent-color);
-    animation: typing 1s infinite;
-  }
-  
-  /* 发送按钮 */
-  .sendButton {
-    border: none;
-    cursor: pointer;
-    background-color: transparent;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 8px;
-    border-radius: 50%;
-    transition: all 0.3s ease;
-  }
-  
-  .sendButton:hover:not(:disabled) {
-    background-color: var(--surface-highlight);
+  50% {
     transform: scale(1.1);
+    opacity: 0.3;
   }
-  
-  .sendButton:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
+  100% {
+    transform: scale(1);
+    opacity: 0;
   }
-  
-  .sendIcon {
-    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+/* Floating dots animation */
+@keyframes floatingDots {
+  0%,
+  100% {
+    transform: translateY(0);
   }
-  
-  .sendIconActive {
-    animation: glowPulse 1.5s infinite;
+  50% {
+    transform: translateY(-3px);
   }
-  
-  /* 加载指示器 (示例：三个跳动的点) */
-  .loadingIndicator {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 4px;
+}
+
+.titleBounce {
+  animation: titleBounce 0.5s ease-in-out forwards;
+}
+
+.iconContainer {
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+}
+
+.chatIcon {
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.chatIconHover {
+  transform: scale(1.15);
+  filter: drop-shadow(0 0 5px var(--accent-color));
+}
+
+.chatIconBubble {
+  fill: var(--accent-color);
+  transition: fill 0.3s ease;
+}
+
+.chatIconHover .chatIconBubble {
+  fill: var(--accent-hover-color);
+}
+
+.chatIconDot {
+  fill: var(--surface-color);
+}
+
+.dot1 {
+  animation: floatingDots 1.5s ease-in-out infinite;
+}
+
+.dot2 {
+  animation: floatingDots 1.5s ease-in-out infinite 0.2s;
+}
+
+.dot3 {
+  animation: floatingDots 1.5s ease-in-out infinite 0.4s;
+}
+
+.pulseCircle1 {
+  fill: var(--accent-color);
+  opacity: 0;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.pulseCircle2 {
+  fill: var(--accent-color);
+  opacity: 0;
+  animation: pulse 2s ease-in-out infinite 0.5s;
+}
+
+/* Title text wrapper to prevent blur */
+.titleTextWrapper {
+  /* Prevents blurry text by ensuring pixel alignment */
+  transform: translateZ(0);
+  /* Optimize text rendering */
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Prevent subpixel rendering which can cause blur */
+  backface-visibility: hidden;
+}
+
+/* Improved title styles */
+.chatTitle strong {
+  font-family: var(--cartoon-font);
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+
+  will-change: transform;
+
+  transform: translateZ(0);
+}
+
+@keyframes titleBounce {
+  0%,
+  100% {
+    transform: translateY(0);
   }
-  
-  .loadingDot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background-color: var(--accent-color);
-    animation: loadingBounce 1.4s infinite ease-in-out both;
+  40% {
+    transform: translateY(-10px);
   }
-  
-  .loadingDot:nth-child(1) { animation-delay: -0.32s; }
-  .loadingDot:nth-child(2) { animation-delay: -0.16s; }
-  .loadingDot:nth-child(3) { animation-delay: 0s; }
-  
-  @keyframes loadingBounce {
-    0%, 80%, 100% { transform: scale(0); }
-    40% { transform: scale(1.0); }
+  60% {
+    transform: translateY(-5px);
   }
+}
+
+.titleBounce {
+  animation: titleBounce 0.5s ease-in-out forwards;
+  /* These properties help prevent blurry text during animation */
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
