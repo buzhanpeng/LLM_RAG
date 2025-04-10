@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import ChatTitle from '@/app/ui/components/chat-title';
 import ChatBubbles from '@/app//ui/components/chat-bubbles';
@@ -10,23 +10,67 @@ import ChatBar from '@/app/ui/components/chat-bar';
 import "@/app/globals.css";
 
 export default function Home() {
-
   const [messages, setMessages] = useState<{ text: string; sender: string }[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSendMessage = (message: string, response:string) => {
+  const handleSendMessage = async (message: string) => {
     if (!message.trim()) return;
+    
+    // 添加用户消息
     const newMessage = { text: message, sender: 'user' };
-    setMessages([...messages, newMessage]);
-    setTimeout(() => {
-      setMessages(messages => [...messages, { text: response, sender: 'bot' }]);
-    }, 500);
+    setMessages(prevMessages => [...prevMessages, newMessage]);
+    
+    // 显示加载状态
+    setIsLoading(true);
+    
+    try {
+      // 调用API获取响应
+      const response = await fetch('http://localhost:8000/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ "msg": message }),
+      });
+
+      if (response.ok) {
+        const responseData = await response.json();
+        const apiMessage = responseData.result.response;
+        
+        // 添加机器人响应消息
+        setTimeout(() => {
+          setMessages(prevMessages => [...prevMessages, { text: apiMessage, sender: 'bot' }]);
+          setIsLoading(false);
+        }, 500);
+      } else {
+        console.error('Error in the API request');
+        setIsLoading(false);
+        // 添加错误消息
+        setTimeout(() => {
+          setMessages(prevMessages => [
+            ...prevMessages, 
+            { text: "Sorry, I couldn't process your request. Please try again.", sender: 'bot' }
+          ]);
+        }, 500);
+      }
+    } catch (error) {
+      console.error('Error sending the message:', error);
+      setIsLoading(false);
+      // 添加错误消息
+      setTimeout(() => {
+        setMessages(prevMessages => [
+          ...prevMessages, 
+          { text: "Network error. Please check your connection and try again.", sender: 'bot' }
+        ]);
+      }, 500);
+    }
   };
 
   return (
     <main>
       <ChatTitle/>
       <ChatBubbles messages={messages}/>
-      <ChatBar onSendMessage={handleSendMessage}/>
+      <ChatBar onSendMessage={handleSendMessage} isLoading={isLoading} />
     </main>
   );
 }
