@@ -114,7 +114,7 @@ const ChatBar: React.FC<ChatBarProps> = ({ onSendMessage, isLoading = false }) =
               disabled={!file}
               className={styles.uploadButton}
             >
-              Subir Documento
+              Submit Document
             </button>
         </div>
         <form
