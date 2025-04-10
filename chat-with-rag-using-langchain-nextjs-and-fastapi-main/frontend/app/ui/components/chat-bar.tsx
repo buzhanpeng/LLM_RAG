@@ -22,8 +22,12 @@ const FILE_TYPE_DICT = {
 };
 
 const AVAILABLE_MODELS = [
-  { id: 'OpenAI', name: 'GPT-4' },
-  { id: 'DeepSeek', name: 'DS-O1' },
+  { id: 'OpenAI', name: 'GPT-3.5' },
+  { id: 'DeepSeek', name: 'DS-R1' },
+  { id: 'llama', name: 'llama-3.2' },
+  { id: 'qwen', name: 'qwen-2.5' },
+  { id: 'gemini', name: 'gemini-2.0' },
+  { id: 'hunyuan', name: 'hunyuan' },
 ];
 
 const ChatBar: React.FC<ChatBarProps> = ({ onSendMessage, isLoading = false, onModelChange }) => {
