@@ -587,6 +587,7 @@
 
 .modelSelectIcon {
   transition: transform 0.3s ease;
+  filter: brightness(0) invert(1);
 }
 
 .modelSelectButton:hover .modelSelectIcon {
