@@ -1,0 +1,102 @@
+[
+    {
+    "query": "Why does Blore think Rogers killed his wife?",
+    "answer": "Blore thinks that Rogers and his wife had committed a murder together and got away with it. But last night someone leaked the secret, and his wife might confess out of fear. This was a threat to Rogers. For his own safety, he couldn't let his wife have the chance to confess, so he put drugs in her tea to make her shut up forever.",
+    "context": "Blore said: “And there's the position for you! They've done a murder and got away with it. But if the whole thing's going to be raked up, what's going to happen? Ten to one, the woman will give the show away. She hasn't got the nerve to stand up and brazen it out. She's a living danger to her husband, that's what she is. He's all right. He'll lie with a straight face till kingdom comes but he can't be sure of her! And if she goes to pieces, his neck's in danger! So he slips something into a cup of tea and makes sure that her mouth is shut permanently."
+    },
+    {
+    "query": "What question did Armstrong raise about the scene of Mrs. Rogers' death?",
+    "answer": "Armstrong said that there was no empty cup by Mrs. Rogers' bedside. There was nothing there at all, and he had checked it. He thought that if Mrs. Rogers had drunk the drugged tea, there should have been an empty cup by the bedside.",
+    "context": "Armstrong said slowly: “There was no empty cup by her bedside there was nothing there at all. I looked.”"
+    },
+    {
+    "query": "What was General Macarthur's opinion on Blore's speculation that Rogers killed his wife?",
+    "answer": "General Macarthur expressed doubt. He said that it was hard for him to believe that a man would do such a thing to his wife.",
+    "context": "General Macarthur said doubtfully: “It may be so. But I should hardly think it possible that a man would do that to his wife.”"
+    },
+    {
+    "query": "Why does Blore think the motorboat didn't come?",
+    "answer": "Blore thinks that the motorboat not coming is not an accident. It is part of the whole incident and is closely connected with other things.",
+    "context": "Blore said: “It's not an accident that's what I say. It's part and parcel of the whole business. It's all bound up together.”"
+    },
+    {
+    "query": "What was Rogers' state when he went to find Doctor Armstrong?",
+    "answer": "Rogers' face was twitching. His face was greyish green, and his hands were shaking. This was in sharp contrast to his restraint a few minutes ago, showing that he was flustered and nervous.",
+    "context": "Armstrong, after a moment of indecision, turned towards the latter. But at that moment Rogers came quickly out of the house. “Could I have a word with you, sir, please?” Armstrong turned. He was startled at what he saw. Rogers' face was working. Its colour was greyish green. His hands shook. It was such a contrast to his restraint of a few minutes ago that Armstrong was quite taken aback."
+    },
+    {
+    "query": "Why does Vera think General Macarthur might not be able to hear the lunch gong?",
+    "answer": "Vera thinks that General Macarthur is sitting right by the sea, and he might not be able to hear the gong there. Moreover, she thinks that General Macarthur was a bit confused that day.",
+    "context": "Vera said: 'General Macarthur is sitting right down by the sea. I don't expect he would hear the gong there and anyway' she hesitated 'he's a little vague today, I think.'"
+    },
+    {
+    "query": "What did Doctor Armstrong find when he went to call General Macarthur for lunch?",
+    "answer": "Doctor Armstrong found that General Macarthur was dead. He was killed by being hit on the back of the head with a life preserver or something similar.",
+    "context": "Dr. Armstrong appeared, his breath coming fast. He said: 'General Macarthur 'Dead!The voice burst from Vera explosively. Armstrong said:Yes, he's dead... and Armstrong was very pale. He said:No question of heart failure or anything like that. Macarthur was hit with a life preserver or some such thing on the back of the head."
+    },
+    {
+    "query": "What did Vera say to Rogers in the dining room?",
+    "answer": "Vera said to Rogers in a loud and harsh voice that he was right, and he could look for himself. Now there were only seven people left.",
+    "context": "In a loud harsh voice that surprised herself Vera said: 'You're quite right, Rogers. Look for yourself. There are only seven...'"
+    },
+    {
+    "query": "What did Mr. Justice Wargrave do after learning about General Macarthur's death?",
+    "answer": "Mr. Justice Wargrave asked the doctor about the cause of death and the murder weapon. After making the situation clear, with the long-established habit of authority, he took over the situation, presided over the current “situation”, and began to ask the others about their previous investigation of the unknown murderer on the island and their conclusions about Mr. Owen's purpose of luring them to the island.",
+    "context": "They opened as the doctor came into the room. He said in a clear penetrating voice: 'Well, doctor?' and Mr. Justice Wargrave said quietly: 'We know now exactly where we are.' and There was no doubt now who was in charge of the situation. This morning Wargrave had sat huddled in his chair on the terrace refraining from any overt activity. Now he assumed command with the ease born of a long habit of authority. He definitely presided over the court. Clearing his throat, he once more spoke. 'This morning, gentlemen, whilst I was sitting on the terrace. I was an observer of your activities. There could be little doubt of your purpose. You were searching the island for an unknown murderer?'"
+    },
+    {
+    "query": "What did Blore mention about the weather?",
+    "answer": "Blore mentioned that there was an old fellow on the train from Plymouth yesterday who kept saying that a storm was coming. He also said that these old sailors are very accurate in judging the weather.",
+    "context": "Blore made a contribution to the discourse. He said conversationally: 'There was an old fellow in the train from Plymouth yesterday. He kept saying a storm was coming. Wonderful how they know weather, these old salts.'"
+    },
+    {
+    "query": "Do Philip Lombard and Vera think that the old judge Wargrave's statement that the murderer is one of them is correct?",
+    "answer": "Logically, they think that the old judge Wargrave's statement is correct, but emotionally and in common sense, it is hard to believe.",
+    "context": "Philip Lombard said slowly: 'It's difficult to say. Logically, you know, he's right, and yet ' Vera took the words out of his mouth. 'And yet it seems so incredible!'"
+    },
+    {
+    "query": "Who does Philip Lombard speculate the murderer might be and what is the reason?",
+    "answer": "Philip Lombard guesses that the murderer might be Wargrave. The reason is that Wargrave is an old man. He has presided over courts for many years and has played the role of something like God. This may have eventually made his head swell, and he wants to go one step further and become an executioner and a special judge.",
+    "context": "Philip Lombard said: 'Hard to say exactly. But to begin with, he's an old man and he's been presiding over courts of law for years. That is to say, he's played God Almighty for a good many months every year. That must go to a man's head eventually. He gets to see himself as all powerful, as holding the power of life and death and it's possible that his brain might snap and he might want to go one step farther and be Executioner and Judge Extraordinary.'"
+    },
+    {
+    "query": "Who does Vera speculate the murderer might be and what is the reason?",
+    "answer": "Vera thinks that the murderer might be Dr. Armstrong. The reasons are that there have been two deaths caused by poisoning, which points to the doctor. Also, the sleeping pills that Mrs. Rogers took were given by him. At the same time, if a doctor goes crazy, it is not easy to be detected, and doctors are overworked and under great pressure.",
+    "context": "Vera said without any hesitation: 'Dr. Armstrong.' Lombard gave a low whistle. 'The doctor, eh? You know, I should have put him last of all.' Vera shook her head. 'Oh, no! Two of the deaths have been poison. That rather points to a doctor. And then you can't get over the fact that the only thing we are absolutely certain Mrs. Rogers had was the sleeping draught that he gave her.' Vera persisted: 'If a doctor went mad, it would be a long time before any one suspected. And doctors overwork and have a lot of strain.'"
+    },
+    {
+    "query": "What question did Rogers ask Blore?",
+    "answer": "Rogers asked Blore if he knew who the murderer was. He wanted to know which one of them was the “fiend in human form”.",
+    "context": "Rogers' face was working. His hands were clenched round the polishing leather that he held in his hand. Ex-inspector Blore said: 'Eh, my lad, that's the question!' 'One of us, 'is lordship said. Which one? That's what I want to know. Who's the fiend in 'uman form?'"
+    },
+    {
+    "query": "What measures does Mr. Justice Wargrave think they can take to deal with the possible murder?",
+    "answer": "It is not clearly mentioned in the text what specific measures Mr. Justice Wargrave thinks they can take. It only says that he thinks there are several things they can do.",
+    "context": "Mr. Justice Wargrave said: 'I think that there are several things we can do.' but the specific content is not elaborated."
+    },
+    {
+    "query": "What abnormal situation did Rogers find?",
+    "answer": "Rogers found that the scarlet oilcloth curtain in the bathroom was gone. It was there in the morning, but now it has disappeared cleanly.",
+    "context": "Rogers said nervously and at random: 'Excuse me, sir, but does any one know what's become of the bathroom curtain?' Lombard's head went up with a jerk. 'The bathroom curtain? What the devil do you mean, Rogers?' 'It's gone, sir, clean vanished. I was going round drawing all the curtains and the one in the lav bathroom wasn't there any longer.' Mr. Justice Wargrave asked: 'Was it there this morning?' 'Oh, yes, sir.'"
+    },
+    {
+    "query": "What safety measures did everyone take when they went to bed at night?",
+    "answer": "When going to bed at night, the ladies locked the doors and bolted them after entering their rooms. The gentlemen also locked their doors. Blore also suggested putting a chair under the doorknob because someone could turn the lock from the outside. Rogers also locked the door of his own room and bolted it. He also locked the door of the dining room leading to the pantry and the door leading to the hall and took the key away.",
+    "context": "Vera said: 'I'll go to bed too.' The two women went up the stairs and Lombard and Blore went with them. Standing at the top of the stairs, the two men watched the women go into their respective rooms and shut the doors. They heard the sound of two bolts being shot and the turning of two keys. Blore said with a grin: 'No need to tell 'em to lock their doors!' Lombard said: 'Well, they're all right for the night, at any rate!' He went down again and the other followed him. and The judge's voice spoke: 'I need hardly advise you, gentlemen, to lock your doors.' Blore said: 'And, what's more, put a chair under the handle. There are ways of turning locks from the outside.' and Rogers came out of the dining room and slipped halfway up the stairs. He saw four figures pass through four doors and heard the turning of four locks and the shooting of four bolts. He nodded his head. 'That's all right,' he muttered. He went back into the dining room. Yes, everything was ready for the morning. His eye lingered on the centre plaque of looking glass and the seven little china figures. A sudden grin transformed his face. He murmured: 'I'll see no one plays tricks tonight, at any rate.' Crossing the room he locked the door to the pantry. Then going through the other door to the hall he pulled the door to, locked it and slipped the key into his pocket. Then, extinguishing the lights, he hurried up the stairs and into his new bedroom. There was only one possible hiding place in it, the tall wardrobe, and he looked into that immediately. Then, locking and bolting the door, he prepared for bed."
+    },
+    {
+    "query": "What did Philip Lombard find the next morning?",
+    "answer": "The next morning, Philip Lombard found that Rogers was missing. He was not in his room and could not be found anywhere else. There was no water boiling in the kitchen, and the fire was not lit either. Moreover, the little Chinese porcelain figures on the dining table had decreased from seven to six.",
+    "context": "Philip Lombard said: 'Anybody called you or brought you any tea? Do you know what time it is?' Blore said: 'Twenty-five to ten. Wouldn't have believed I could have slept like that. Where's Rogers?' Philip Lombard said: 'It's a case of echo answers where?' and Lombard said: 'He might have done that last night.' They all moved inside the room, looking at the neatly set plates and cutlery. At the row of cups on the sideboard. At the felt mats placed ready for the coffee urn. It was Vera who saw it first. She caught the judge's arm and the grip of her athletic fingers made the old gentleman wince. She cried out: 'The Indians! Look!' There were only six china figures in the middle of the table."
+    },
+    {
+    "query": "Where was Rogers' body found and what was the cause of his death?",
+    "answer": "Rogers' body was found in the small laundry across the yard. The cause of his death was that the murderer crept up behind him when he was bending over to chop wood for starting the fire and struck his head violently with a large axe. There was a deep wound on his head, and the metal part of the large axe, which was the murder weapon, had a dull brown bloodstain.",
+    "context": "They found him shortly afterwards. He was in the little washhouse across the yard. He had been chopping sticks in preparation for lighting the kitchen fire. The small chopper was still in his hand. A bigger chopper, a heavy affair, was leaning against the door the metal of it stained a dull brown. It corresponded only too well with the deep wound in the back of Rogers' head... and Armstrong. 'The murderer must have crept up behind him, swung the chopper once and brought it down on his head as he was bending over.'"
+    },
+    {
+    "query": "What was Vera Claythorne's reaction after she found that the number of the little porcelain figures had decreased?",
+    "answer": "After Vera Claythorne found that the little porcelain figures on the dining table had decreased from seven to six, she suddenly burst into sharp laughter. She also asked loudly whether there were bees on the island and where the honey came from.",
+    "context": "It was Vera who saw it first. She caught the judge's arm and the grip of her athletic fingers made the old gentleman wince. She cried out: 'The Indians! Look!' There were only six china figures in the middle of the table. and Vera Claythorne was standing in the yard. She cried out in a high shrill voice, shaken with wild bursts of laughter: 'Do they keep bees on this island? Tell me that. Where do we go for honey? Ha! ha!'"
+    }
+]
