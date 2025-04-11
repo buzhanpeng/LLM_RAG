@@ -12,7 +12,7 @@ import "@/app/globals.css";
 export default function Home() {
   const [messages, setMessages] = useState<{ text: string; sender: string }[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [currentModel, setCurrentModel] = useState('general');
+  const [currentModel, setCurrentModel] = useState('OpenAI');
 
   const handleSendMessage = async (message: string) => {
     if (!message.trim()) return;
