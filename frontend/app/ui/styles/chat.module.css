@@ -1,0 +1,960 @@
+/* chat.module.css */
+
+/* Defining Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 40px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(0, 123, 255, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(0, 123, 255, 0);
+  }
+}
+
+@keyframes typing {
+  0%,
+  100% {
+    border-color: transparent;
+  }
+  50% {
+    border-color: var(--accent-color);
+  }
+}
+
+@keyframes floatingElement {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes wiggle {
+  0%,
+  100% {
+    transform: rotate(-3deg);
+  }
+  50% {
+    transform: rotate(3deg);
+  }
+}
+
+@keyframes glowPulse {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 2px var(--accent-color));
+  }
+  50% {
+    filter: drop-shadow(0 0 8px var(--accent-color));
+  }
+}
+
+/* Chat area container */
+.chatArea {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background-color: var(--surface-color);
+  border-radius: 12px;
+  margin: 20px;
+  box-shadow: 0 8px 25px var(--shadow-color);
+  border: 1px solid var(--border-color);
+}
+
+/* Chat Title */
+.chatTitle {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  color: var(--primary-text-color);
+  font-weight: 500;
+  font-size: 1.1em;
+  padding: 15px 20px;
+  background-color: var(--surface-highlight);
+  border-bottom: 1px solid var(--border-color);
+  border-radius: 12px 12px 0 0;
+}
+
+.chatTitle strong {
+  font-family: var(--cartoon-font);
+  animation: floatingElement 3s ease-in-out infinite;
+}
+
+.chatTitle img {
+  animation: wiggle 5s ease-in-out infinite;
+}
+
+.chatBubblesContainer {
+  display: flex;
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.chatBubbles {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  margin: 0;
+  padding: 20px;
+  overflow-y: auto;
+  gap: 12px;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+/* Hide native scrollbars */
+.chatBubbles::-webkit-scrollbar {
+  display: none;
+}
+
+/* Customizing the scrollbar container */
+.customScrollbar {
+  position: absolute;
+  right: 5px;
+  top: 10px;
+  bottom: 10px;
+  width: 12px;
+  z-index: 10;
+}
+
+.scrollTrack {
+  position: absolute;
+  width: 6px;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  background-color: var(--scrollbar-track-color);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.scrollThumb {
+  position: absolute;
+  width: 6px;
+  background-color: var(--scrollbar-color);
+  border-radius: 4px;
+  cursor: grab;
+  transition: width 0.2s ease;
+}
+
+.scrollThumb:hover {
+  width: 10px;
+  background-color: var(--accent-hover-color);
+}
+
+.scrollThumb:active {
+  cursor: grabbing;
+}
+
+/* Generic Message Bubble Style */
+.messageBase {
+  padding: 10px 15px;
+  border-radius: 18px;
+  max-width: 75%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  line-height: 1.5;
+  word-wrap: break-word;
+  animation: fadeInUp 0.5s ease-out forwards;
+  transition: background-color 0.3s ease, border-color 0.3s ease,
+    box-shadow 0.3s ease, transform 0.2s ease, filter 0.3s ease;
+}
+
+/* user message */
+.userMessage {
+  composes: messageBase;
+  align-self: flex-end;
+  background-color: var(--accent-color);
+  color: #111;
+  border-radius: 16px 16px 4px 16px;
+  animation: fadeInUp 0.5s ease-out forwards,
+    floatingElement 6s ease-in-out infinite;
+  font-family: var(--cartoon-font);
+}
+
+.userMessage:hover {
+  filter: brightness(1.1);
+  transform: scale(1.02);
+}
+
+/* Bot News */
+.botMessage {
+  composes: messageBase;
+  align-self: flex-start;
+  background-color: var(--surface-highlight);
+  color: var(--primary-text-color);
+  border: 1px solid var(--border-color);
+  border-radius: 16px 16px 16px 4px;
+}
+
+.botMessage:hover {
+  border-color: var(--secondary-text-color);
+  transform: translateY(-2px);
+}
+
+/* Chat input field */
+.chatBar {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--border-color);
+  margin: 0;
+  padding: 15px 20px;
+  gap: 15px;
+  background-color: var(--surface-color);
+  border-radius: 0 0 12px 12px;
+}
+
+/* File upload section */
+.fileUploadSection {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.fileUploadLabel {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  border-radius: 50%;
+  background-color: var(--surface-highlight);
+  transition: all 0.3s ease;
+}
+
+.fileUploadLabel:hover {
+  background-color: var(--border-color);
+  transform: rotate(15deg);
+}
+
+.paperclipIcon {
+  transition: transform 0.3s ease;
+}
+
+.fileUploadLabel:hover .paperclipIcon {
+  transform: scale(1.2);
+}
+
+.uploadButton {
+  padding: 8px 12px;
+  background-color: var(--surface-highlight);
+  color: var(--primary-text-color);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  font-size: 0.9em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: var(--cartoon-font);
+}
+
+.uploadButton:hover:not(:disabled) {
+  background-color: var(--border-color);
+  transform: translateY(-2px);
+}
+
+.uploadButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* message form */
+.messageForm {
+  display: flex;
+  justify-content: start;
+  align-items: flex-end;
+  gap: 10px;
+  width: 100%;
+}
+
+/* textbox container */
+.textareaContainer {
+  position: relative;
+  flex: 1;
+  border-radius: 20px;
+  background-color: var(--surface-highlight);
+  border: 1px solid var(--border-color);
+  padding: 10px 15px;
+  transition: all 0.3s ease, height 0.2s ease;
+}
+
+.textareaContainer:focus-within {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 10px var(--glow-color);
+}
+
+/* typing indicator */
+.typingIndicator {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  width: 8px;
+  height: 8px;
+  background-color: var(--accent-color);
+  border-radius: 50%;
+  animation: glowPulse 0.8s infinite;
+}
+
+/* Input Box Style */
+.messageTextarea {
+  width: 100%;
+  border: none;
+  outline: none;
+  color: var(--primary-text-color);
+  background-color: transparent;
+  resize: none;
+  overflow-y: auto;
+  font-family: var(--cartoon-font);
+  font-size: 1em;
+  min-height: 24px;
+  max-height: 150px;
+}
+
+.messageTextarea::placeholder {
+  color: var(--secondary-text-color);
+  opacity: 0.7;
+}
+
+/* Typing animation */
+.isTyping .messageTextarea {
+  border-right: 2px solid var(--accent-color);
+  animation: typing 1s infinite;
+}
+
+/* Send button */
+.sendButton {
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.sendButton:hover:not(:disabled) {
+  background-color: var(--surface-highlight);
+  transform: scale(1.1);
+}
+
+.sendButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.sendIcon {
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.sendIconActive {
+  animation: glowPulse 1.5s infinite;
+}
+
+/* Load indicator (example: three jumping dots) */
+.loadingIndicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.loadingDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--accent-color);
+  animation: loadingBounce 1.4s infinite ease-in-out both;
+}
+
+.loadingDot:nth-child(1) {
+  animation-delay: -0.32s;
+}
+.loadingDot:nth-child(2) {
+  animation-delay: -0.16s;
+}
+.loadingDot:nth-child(3) {
+  animation-delay: 0s;
+}
+
+@keyframes loadingBounce {
+  0%,
+  80%,
+  100% {
+    transform: scale(0);
+  }
+  40% {
+    transform: scale(1);
+  }
+}
+
+/* Add these new animations*/
+
+/* Title bounce animation */
+@keyframes titleBounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+/* Pulse animation for hover effects */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.3;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+/* Floating dots animation */
+@keyframes floatingDots {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+.titleBounce {
+  animation: titleBounce 0.5s ease-in-out forwards;
+}
+
+.iconContainer {
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+}
+
+.chatIcon {
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.chatIconHover {
+  transform: scale(1.15);
+  filter: drop-shadow(0 0 5px var(--accent-color));
+}
+
+.chatIconBubble {
+  fill: var(--accent-color);
+  transition: fill 0.3s ease;
+}
+
+.chatIconHover .chatIconBubble {
+  fill: var(--accent-hover-color);
+}
+
+.chatIconDot {
+  fill: var(--surface-color);
+}
+
+.dot1 {
+  animation: floatingDots 1.5s ease-in-out infinite;
+}
+
+.dot2 {
+  animation: floatingDots 1.5s ease-in-out infinite 0.2s;
+}
+
+.dot3 {
+  animation: floatingDots 1.5s ease-in-out infinite 0.4s;
+}
+
+.pulseCircle1 {
+  fill: var(--accent-color);
+  opacity: 0;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.pulseCircle2 {
+  fill: var(--accent-color);
+  opacity: 0;
+  animation: pulse 2s ease-in-out infinite 0.5s;
+}
+
+/* Title text wrapper to prevent blur */
+.titleTextWrapper {
+  /* Prevents blurry text by ensuring pixel alignment */
+  transform: translateZ(0);
+  /* Optimize text rendering */
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Prevent subpixel rendering which can cause blur */
+  backface-visibility: hidden;
+}
+
+/* Improved title styles */
+.chatTitle strong {
+  font-family: var(--cartoon-font);
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+
+  will-change: transform;
+
+  transform: translateZ(0);
+}
+
+@keyframes titleBounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+.titleBounce {
+  animation: titleBounce 0.5s ease-in-out forwards;
+  /* These properties help prevent blurry text during animation */
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+/* Model selection container */
+.modelSelectContainer {
+  position: relative;
+  margin-left: 10px;
+}
+
+/* Model select button */
+.modelSelectButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background-color: var(--surface-highlight);
+  color: var(--primary-text-color);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  font-size: 0.9em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: var(--cartoon-font);
+}
+
+.modelSelectButton:hover {
+  background-color: var(--border-color);
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.modelSelectIcon {
+  transition: transform 0.3s ease;
+  filter: brightness(0) invert(1);
+}
+
+.modelSelectButton:hover .modelSelectIcon {
+  transform: rotate(15deg);
+  animation: glowPulse 1.5s infinite;
+}
+
+.selectedModelName {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 120px;
+}
+
+/* Dropdown menu */
+.modelDropdown {
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 0;
+  width: 200px;
+  background-color: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  z-index: 10;
+  overflow: hidden;
+  animation: fadeInUp 0.3s ease-out forwards;
+}
+
+/* Model options */
+.modelOption {
+  width: 100%;
+  padding: 10px 15px;
+  text-align: left;
+  background-color: transparent;
+  color: var(--primary-text-color);
+  border: none;
+  border-bottom: 1px solid var(--border-color);
+  font-size: 0.9em;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  font-family: var(--cartoon-font);
+}
+
+.modelOption:last-child {
+  border-bottom: none;
+}
+
+.modelOption:hover {
+  background-color: var(--surface-highlight);
+}
+
+.selectedModel {
+  background-color: var(--accent-color);
+  color: #111;
+  font-weight: 500;
+}
+
+.selectedModel:hover {
+  background-color: var(--accent-color);
+  filter: brightness(1.1);
+}
+
+/* New animation for dropdown */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mobile responsiveness for model selector */
+@media (max-width: 600px) {
+  .selectedModelName {
+    display: none;
+  }
+
+  .modelSelectButton {
+    padding: 8px;
+  }
+
+  .modelDropdown {
+    width: 180px;
+    right: 0;
+    left: auto;
+  }
+}
+
+/* 文件上传容器 */
+.fileUploadContainer {
+  position: relative;
+  margin-right: 10px;
+}
+
+/* 文件上传按钮 */
+.fileUploadButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background-color: var(--surface-highlight);
+  color: var(--primary-text-color);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  font-size: 0.9em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: var(--cartoon-font);
+}
+
+.fileUploadButton:hover {
+  background-color: var(--border-color);
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.paperclipIcon {
+  transition: transform 0.3s ease;
+  filter: brightness(0) invert(1); /* 使图标变白色 */
+}
+
+.fileUploadButton:hover .paperclipIcon {
+  transform: rotate(15deg);
+  animation: glowPulse 1.5s infinite;
+}
+
+.uploadButtonText {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100px;
+}
+
+/* 文件类型下拉菜单 */
+.fileTypeDropdown {
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 0;
+  width: 220px;
+  background-color: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  z-index: 10;
+  overflow: hidden;
+  animation: fadeInUp 0.3s ease-out forwards;
+}
+
+.fileTypeHeader {
+  padding: 10px 15px;
+  border-bottom: 1px solid var(--border-color);
+  font-size: 0.9em;
+  color: var(--secondary-text-color);
+  font-weight: 500;
+}
+
+/* 文件类型选项 */
+.fileTypeOption {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px 15px;
+  text-align: left;
+  background-color: transparent;
+  color: var(--primary-text-color);
+  border: none;
+  border-bottom: 1px solid var(--border-color);
+  font-size: 0.9em;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.fileTypeOption:last-child {
+  border-bottom: none;
+}
+
+.fileTypeOption:hover {
+  background-color: var(--surface-highlight);
+}
+
+.fileExtension {
+  font-weight: 500;
+  color: var(--accent-color);
+}
+
+.fileDescription {
+  color: var(--secondary-text-color);
+  font-size: 0.85em;
+}
+
+/* 已选择文件信息 */
+.selectedFileInfo {
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+  background-color: var(--surface-highlight);
+  border-radius: 15px;
+  margin-right: 10px;
+  border: 1px solid var(--border-color);
+}
+
+.fileName {
+  font-size: 0.85em;
+  color: var(--primary-text-color);
+  margin-right: 5px;
+}
+
+/* 文件类型错误提示 */
+.fileTypeError {
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 0;
+  width: 250px;
+  background-color: rgba(255, 70, 70, 0.2);
+  border: 1px solid rgba(255, 70, 70, 0.5);
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 0.85em;
+  color: #ff4646;
+  z-index: 15;
+  animation: fadeInUp 0.3s ease-out forwards;
+}
+
+/* 修改上传按钮样式 */
+.uploadButton {
+  padding: 8px 12px;
+  background-color: var(--accent-color);
+  color: #111;
+  border: none;
+  border-radius: 20px;
+  font-size: 0.9em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: var(--cartoon-font);
+  font-weight: 500;
+}
+
+.uploadButton:hover:not(:disabled) {
+  background-color: var(--accent-color);
+  filter: brightness(1.1);
+  transform: translateY(-2px);
+}
+
+.uploadButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background-color: var(--surface-highlight);
+  color: var(--secondary-text-color);
+  border: 1px solid var(--border-color);
+}
+
+/* 移动设备适配 */
+@media (max-width: 600px) {
+  .uploadButtonText,
+  .selectedModelName {
+    display: none;
+  }
+
+  .fileUploadButton,
+  .modelSelectButton {
+    padding: 8px;
+  }
+
+  .fileTypeDropdown,
+  .modelDropdown {
+    width: 180px;
+    right: 0;
+    left: auto;
+  }
+
+  .selectedFileInfo {
+    max-width: 80px;
+    overflow: hidden;
+  }
+}
+
+/* Add these new styles to your chat.module.css file */
+
+/* Position-aware dropdown styles */
+.fileTypeDropdown,
+.modelDropdown {
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 0;
+  width: 220px;
+  background-color: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  z-index: 10;
+  overflow: hidden;
+  animation: fadeInDown 0.3s ease-out forwards;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+/* Dropdown that appears above the button */
+.dropdownAbove {
+  bottom: calc(100% + 5px);
+  top: auto;
+  animation: fadeInUp 0.3s ease-out forwards;
+}
+
+/* Animation for dropdown appearing from top */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Animation for dropdown appearing from bottom */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Limit dropdown height for long lists */
+.fileTypeDropdown {
+  max-height: 250px;
+  overflow-y: auto;
+}
+
+/* Custom scrollbar for dropdowns */
+.fileTypeDropdown::-webkit-scrollbar,
+.modelDropdown::-webkit-scrollbar {
+  width: 4px;
+}
+
+.fileTypeDropdown::-webkit-scrollbar-track,
+.modelDropdown::-webkit-scrollbar-track {
+  background: var(--surface-highlight);
+}
+
+.fileTypeDropdown::-webkit-scrollbar-thumb,
+.modelDropdown::-webkit-scrollbar-thumb {
+  background-color: var(--accent-color);
+  border-radius: 4px;
+}
+
+/* Make file type error appear more intelligently */
+.fileTypeError {
+  position: absolute;
+  top: auto;
+  bottom: calc(100% + 5px);
+  left: 0;
+  width: 250px;
+  background-color: rgba(255, 70, 70, 0.2);
+  border: 1px solid rgba(255, 70, 70, 0.5);
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 0.85em;
+  color: #ff4646;
+  z-index: 15;
+  animation: fadeInUp 0.3s ease-out forwards;
+}
